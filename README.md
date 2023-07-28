@@ -1,5 +1,7 @@
 
 # E-commerce Api
+Implementação de funcionalidades comuns em um sistema e-commerce, como adição, listagem, atualização de produtos, categorias, usuários, dentre outros objetos que compoêm o contexto do negócio.
+
 
 Suba os containers do projeto
 ```sh
