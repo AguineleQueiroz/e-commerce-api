@@ -32,8 +32,9 @@ class ProductController extends Controller
     public function store(StoreUpdateProductRequest $request)
     {   $data = $request->validated();
         $product = $this->repository->create($data);
-        new ProductResource($product);
-        return response()->json(["message" => "Product was created successfuly."]);
+        return (new ProductResource($product))
+            ->response()
+            ->json(["message" => "Product was created successfuly."]);
     }
 
     /**
@@ -56,7 +57,7 @@ class ProductController extends Controller
         $new_data_product = $request->validated();
         $product = $this->repository->findOrFail($id);
         if(!$product) {
-            return response()->json(["message" => "Product not exist."], 404);
+            return response()->json(["message" => "Product does not exist."], 404);
         }
         $product->update($new_data_product);
         return (new ProductResource($product))
@@ -71,7 +72,7 @@ class ProductController extends Controller
     {
         $product = $this->repository->findOrFail($id);
         if(!$product) {
-            return response()->json(["message" => "Product not exist."], 404);
+            return response()->json(["message" => "Product does not exist."], 404);
         }
         $product->delete();
         return response()->json(["message" => "Product was removed successfuly."]);
